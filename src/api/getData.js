@@ -177,3 +177,8 @@ export const addPlatForm = data => fetch('/admin/platform/addPlatForm', data, 'P
 *修改平台
 */
 export const updatePlatForm = data => fetch('/admin/platform/updatePlatForm', data, 'POST')
+
+/*
+*删除平台
+*/
+export const bulkDeletePlatForm = data => fetch('/admin/platform/bulkDeletePlatForm', data, 'POST')

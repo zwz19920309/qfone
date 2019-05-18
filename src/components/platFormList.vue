@@ -1,7 +1,13 @@
 <template>
   <div class="fillcontain">
     <div class="mar10">
-      <el-table border :data="cPlatFormList" stripe style="width: 100%">
+      <el-table
+        border
+        :data="cPlatFormList"
+        stripe
+        style="width: 100%"
+        @selection-change="handleSelectionChange"
+      >
         <el-table-column type="selection" width="55" v-if="isEdit"></el-table-column>
         <el-table-column prop="id" label="平台id"></el-table-column>
         <el-table-column prop="name" label="名称"></el-table-column>
@@ -33,7 +39,7 @@
 </template>
 
 <script>
-import { updatePlatForm, addPlatForm } from '@/api/getData'
+import { updatePlatForm, addPlatForm, bulkDeletePlatForm } from '@/api/getData'
 export default {
   components: {
     'edit-platform-dialog': () => import('@/components/editPlatFormDialog.vue')
@@ -42,16 +48,17 @@ export default {
     let that = this
     return {
       platForm: {},
+      platFromRows: [],
       newPlatForm: { name: '' },
       cPlatFormList: [] || this.platformList,
       cDynamic: this.dynamic || {
         actionbutton: [
           { label: '编辑', type: 'primary', size: 'mini', action: async function (row) { that.editAction(row) } },
-          { label: '删除', type: 'danger', size: 'mini', action: async function (row) { } }
+          { label: '删除', type: 'danger', size: 'mini', action: async function (row) { that.handleDelete(row) } }
         ],
         bluckActionbutton: [
           { label: '新建平台', type: 'primary', size: 'mini', action: async function () { that.createAction() } },
-          { label: '批量删除', type: 'danger', size: 'mini', action: async function () { } }
+          { label: '批量删除', type: 'danger', size: 'mini', action: async function () { that.handleBluckEdit() } }
         ]
       }
     }
@@ -60,6 +67,9 @@ export default {
   methods: {
     async func(func, data) {
       func && func(data)
+    },
+    async handleSelectionChange(data) {
+      this.platFromRows = data
     },
     async editAction(row) { // 编辑
       this.platForm = Object.assign({}, row)
@@ -78,6 +88,15 @@ export default {
         this.$message.error('操作失败')
       }
     },
+    async handleDelete(row) {
+      this.$confirm('确认删除该选项?', '提示', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning' }).then(async () => {
+        let res = await bulkDeletePlatForm({ ids: [row.id] })
+        if (res.status === 200) {
+          this.$message({ message: '删除成功', type: 'success' })
+          this.callBack && this.callBack()
+        }
+      })
+    },
     async handleEdit(data) {
       console.log('editData: ', data)
       let res = await updatePlatForm(data)
@@ -89,6 +108,21 @@ export default {
         this.$message.error('操作失败')
       }
     },
+    async handleBluckEdit() {
+      if (this.platFromRows.length < 1) {
+        this.$message({ message: '请选择要删除的选项', type: 'warning' })
+        return
+      }
+      let ids = []
+      this.platFromRows.forEach(ele => {
+        ids.push(ele.id)
+      })
+      let res = await bulkDeletePlatForm({ 'ids': ids })
+      if (res.status === 200) {
+        this.$message({ message: '删除成功', type: 'success' })
+        this.callBack && this.callBack()
+      }
+    }
   },
   props: ['platFormList', 'isEdit', 'callBack', 'dynamic'], // isEdit false: 只显示：true: 可操作
   watch: {
