@@ -20,7 +20,6 @@ export default {
   },
   methods: {
     async logout() {
-      console.log('@logout: ')
       window.location.href = 'http://admin-upper.jin10.com'
     }
   }

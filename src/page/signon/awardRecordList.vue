@@ -85,8 +85,8 @@ export default {
         sceneId: '',
         qUid: '',
         qSecenId: '',
-        qAppId: 'XenWteXacicouGeoUOxx',
-        qAppSecret: 'c79c292102143b3a8bd39ca9eb7f71c8',
+        qAppId: '',
+        qAppSecret: '',
         reuid: '',
         reSceneId: '',
         reSignDate: ''
@@ -105,7 +105,6 @@ export default {
   },
   created() {
     this.platformId = this.$route.query.platformId
-    console.log('@platformId:', this.platformId)
     this.initData({ page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
   },
   methods: {

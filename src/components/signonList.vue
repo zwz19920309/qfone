@@ -18,6 +18,7 @@
         <template slot-scope="scope">
           <span>{{scope.row.cycle_text.name}}</span>
           <span v-if="scope.row.cycle_text.type == 5">{{scope.row.cycle_text.number}}(天)</span>
+          <span v-else>{{DATETYPEVALUE[scope.row.cycle_text.type]}}(天)</span>
         </template>
       </el-table-column>
       <el-table-column v-if="!simplify" prop="rule_desc" label="规则描述" width="250"></el-table-column>
@@ -85,6 +86,7 @@
 </template>
 
 <script>
+import { DATETYPEVALUE } from '@/common/common'
 import {
   deleteSignon,
   bulkDeleteSignOn,
@@ -102,6 +104,7 @@ export default {
       cPid: '' || this.pid,
       signon: {},
       signons: [],
+      DATETYPEVALUE: DATETYPEVALUE,
       cDynamic: this.dynamic || {
         actionbutton: [
           {

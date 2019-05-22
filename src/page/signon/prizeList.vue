@@ -139,7 +139,7 @@ export default {
       this.sizeOnPrize = row
     },
     async getPrizesBySignon() {
-      let res = await getPrizeList({ id: this.signon.id, number: this.prize.index, type: this.type, page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: this.platformId })
+      let res = await getPrizeList({ id: this.signon.id, number: this.prize.index, type: this.type, page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
       if (res.status === 200) {
         if (!res.data.list || res.data.list.length < 1) {
           return false
