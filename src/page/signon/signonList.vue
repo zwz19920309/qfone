@@ -48,14 +48,13 @@ export default {
   },
   created() {
     this.platformId = this.$route.query.platformId
-    console.log('@platformId: ', this.platformId)
     this.initData(this.pageInfo)
   },
   methods: {
     async initData(params) {
       let res = await getSignonList({
         page: params.currentPage,
-        pageSize: params.pageSize,
+        size: params.pageSize,
         pid: this.platformId
       })
       if (res.status === 200) {

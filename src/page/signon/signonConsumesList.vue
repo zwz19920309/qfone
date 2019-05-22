@@ -64,8 +64,7 @@ export default {
       }
     },
     async DeletePrizes(index, row) {
-      console.log('row: ', row)
-      let res = await bulkDeleteConsumes({ id: this.signonId, date: this.date, prizeIds: [row.prize_id] })
+      let res = await bulkDeleteConsumes({ id: this.signonId, date: this.date, prids: [row.prize_id] })
       if (res.status === 200) {
         this.$message({ message: '删除成功', type: 'success' })
         this.initData({ id: this.signonId, date: this.date })

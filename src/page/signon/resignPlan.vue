@@ -74,7 +74,8 @@ export default {
       reDate: '',
       resignDates: [],
       prizeList: [],
-      extraText: {}
+      extraText: {},
+      pageInfo: { page: 1, pageSize: 5 }
     }
   },
   components: {
@@ -107,9 +108,8 @@ export default {
     async openPrizeList(index, row, type) {
       this.type = type
       this.reDate = row
-      this.pageInfo = { page: 1, pageSize: 10 }
-      // let res = await this.getConsumesBySignon({ id: this.signOnId, type: this.type, date: row, pid: this.platformId })
-      let res = await this.getPrizeList({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: this.platformId })
+      this.pageInfo = { page: 1, pageSize: 5 }
+      let res = await this.getPrizeList({ page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
       if (!res.data || !res.data.list.length) {
         this.$message.error('暂无新奖品')
         return
@@ -142,9 +142,11 @@ export default {
     },
     async handleSizeChange(data) {
       this.pageInfo.pageSize = data
+      await this.getPrizeList({ page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
     },
     async handleCurrentChange(data) {
       this.pageInfo.page = data
+      await this.getPrizeList({ page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
     },
     toSignonPrizeList(index, row) {
       this.$router.push({ path: '/signonConsumesList', query: { signonId: this.signOnId, date: row } })

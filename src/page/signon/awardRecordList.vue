@@ -60,13 +60,22 @@
             <el-button type="primary" @click="onResign">补签</el-button>
           </el-form-item>
         </el-form>
+        <el-form :inline="true" class="demo-form-inline">
+          <el-form-item>
+            <el-input v-model="test.qUid" placeholder="用户uid"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onReward
+            ">查询</el-button>
+          </el-form-item>
+        </el-form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getAwardRecordList, userSignon, getSelfSignon, reSignon } from '@/api/getData'
+import { getAwardRecordList, userSignon, getSelfSignon, reSignon, getUserAwardListBySceneId } from '@/api/getData'
 export default {
   data() {
     return {
@@ -76,8 +85,8 @@ export default {
         sceneId: '',
         qUid: '',
         qSecenId: '',
-        qAppId: '',
-        qAppSecret: '',
+        qAppId: 'XenWteXacicouGeoUOxx',
+        qAppSecret: 'c79c292102143b3a8bd39ca9eb7f71c8',
         reuid: '',
         reSceneId: '',
         reSignDate: ''
@@ -97,7 +106,7 @@ export default {
   created() {
     this.platformId = this.$route.query.platformId
     console.log('@platformId:', this.platformId)
-    this.initData({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: this.platformId })
+    this.initData({ page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
   },
   methods: {
     async initData(params) {
@@ -109,11 +118,11 @@ export default {
     },
     async handleSizeChange(data) {
       this.pageInfo.pageSize = data
-      await this.initData({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: this.platformId })
+      await this.initData({ page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
     },
     async handleCurrentChange(data) {
       this.pageInfo.page = data
-      await this.initData({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: this.platformId })
+      await this.initData({ page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
     },
     async onSubmit() {
       console.log('@onSubmit')
@@ -126,6 +135,9 @@ export default {
     async onResign() {
       console.log('@onResign: -----')
       await reSignon({ uid: this.test.reuid, sceneid: this.test.reSceneId, date: this.test.reSignDate, appid: this.test.qAppId, appsecret: this.test.qAppSecret })
+    },
+    async onReward() {
+      await getUserAwardListBySceneId({ uid: this.test.qUid, sceneid: this.test.qSecenId, scenesignonId: this.test.qSecenId, appid: this.test.qAppId, appsecret: this.test.qAppSecret })
     }
   }
 }

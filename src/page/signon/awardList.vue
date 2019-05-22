@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     async initData(params) {
-      let res = await getPrizeList({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: this.platformId })
+      let res = await getPrizeList({ page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
       if (res.status === 200) {
         this.prizeList = res.data.list
         this.pageInfo.total = res.data.total

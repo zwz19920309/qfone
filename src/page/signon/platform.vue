@@ -7,19 +7,6 @@
       <div class="mar10">
         <platform-list :callBack="initData" :isEdit="isEdit" :platFormList="platFormList"></platform-list>
       </div>
-      <!-- <div class="mar10">
-        <h3>新建平台</h3>
-      </div>
-      <div class="pad10">
-        <el-form :inline="true" class="demo-form-inline">
-          <el-form-item label="平台名称: ">
-            <el-input v-model="platform.name"></el-input>
-          </el-form-item>
-        </el-form>
-      </div>
-      <div class="pad10">
-        <el-button type="primary" @click="submit">确认提交</el-button>
-      </div>-->
     </div>
   </div>
 </template>
@@ -35,7 +22,7 @@ export default {
     }
   },
   components: {
-    'platform-list': () => import('@/components/platFormList.vue'),
+    'platform-list': () => import('@/components/platFormList.vue')
   },
   created() {
     this.initData({})

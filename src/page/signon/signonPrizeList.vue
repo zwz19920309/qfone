@@ -64,7 +64,6 @@ export default {
       }
     },
     async DeletePrizes(index, row) {
-      console.log('row: ', row)
       let res = await signonBulkDeletePrizes({ id: this.signonId, number: this.number, prizeIds: [row.prize.id] })
       if (res.status === 200) {
         this.$message({ message: '删除成功', type: 'success' })

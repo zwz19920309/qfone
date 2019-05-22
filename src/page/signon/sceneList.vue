@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     async initData(params) {
-      let res = await getSceneList({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: this.platformId })
+      let res = await getSceneList({ page: this.pageInfo.page, size: this.pageInfo.pageSize, pid: this.platformId })
       if ((res.status === 200)) {
         this.sceneList = res.data.list
         this.pageInfo.total = res.data.total

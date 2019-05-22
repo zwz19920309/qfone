@@ -96,11 +96,11 @@ export default {
   created() {
     this.platformId = this.$route.query.platformId
     this.sceneId = this.$route.query.id
-    this.initData({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, sceneId: this.sceneId, pid: this.platformId, type: 2 })
+    this.initData({ page: this.pageInfo.page, size: this.pageInfo.pageSize, sceneid: this.sceneId, pid: this.platformId, type: 2 })
   },
   methods: {
     async initData(params) {
-      params = params || { page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, sceneId: this.sceneId, pid: this.platformId, type: 2 }
+      params = params || { page: this.pageInfo.page, size: this.pageInfo.pageSize, sceneid: this.sceneId, pid: this.platformId, type: 2 }
       let res = await getSignonListBySceneId(params)
       if (res.status === 200) {
         this.signonList = res.data.list
@@ -134,7 +134,7 @@ export default {
       }
       let res = await getSignonListBySceneId({
         pid: this.platformId,
-        sceneId: this.sceneId,
+        sceneid: this.sceneId,
         type: 1
       })
       if (res.status === 200 && res.data.list.length) {
@@ -148,7 +148,7 @@ export default {
       console.log('@callBcakHander: ------')
     },
     async deleteOneSceneSignon(signon) {
-      let data = [{ sceneId: this.sceneId, signonId: signon.id }]
+      let data = [{ sceneid: this.sceneId, signonid: signon.id }]
       let res = await bulkDeleteScenesign({ scenesignons: data })
       if (res && res.status === 200) {
         this.$message({ message: '操作成功', type: 'success' })
@@ -164,7 +164,7 @@ export default {
       }
       let scenesignons = []
       signonList.forEach(signon => {
-        scenesignons.push({ sceneId: this.scene.id, signonId: signon.id })
+        scenesignons.push({ sceneid: this.scene.id, signonid: signon.id })
       })
       let res = await bulkDeleteScenesign({ scenesignons: scenesignons })
       if (res && res.status === 200) {
@@ -181,10 +181,10 @@ export default {
       }
       let data = [
         {
-          sceneId: this.sceneId,
-          signonId: signon.id,
-          startAt: signon.start_at,
-          endAt: signon.end_at
+          sceneid: this.scene.id,
+          signonid: signon.id,
+          start: signon.start_at,
+          end: signon.end_at
         }
       ]
       let res = await bulkAddScenesign({ scenesignons: data })
@@ -204,10 +204,10 @@ export default {
           isValid = false
         }
         scenesignons.push({
-          sceneId: this.scene.id,
-          signonId: signon.id,
-          startAt: signon.start_at,
-          endAt: signon.end_at
+          sceneid: this.scene.id,
+          signonid: signon.id,
+          start: signon.start_at,
+          end: signon.end_at
         })
       })
       if (!isValid) {

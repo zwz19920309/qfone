@@ -76,6 +76,12 @@ export default {
       this.$refs.editPlatFormRef.open()
     },
     async createAction(row) { // 编辑
+      console.log('document.cookie: ', document.cookie)
+      if (document.cookie.length > 0) {
+
+        console.log('document.cookie: ', document.cookie)
+      }
+
       this.$refs.createPlatFormRef.open()
     },
     async handleCreate(data) {

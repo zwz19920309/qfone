@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import { getPlatFormList } from '@/api/getData'
 export default {
   data() {
@@ -66,10 +67,14 @@ export default {
     this.initData(this.pageInfo)
   },
   methods: {
+    ...mapActions( // 语法糖
+      ['setUserInfo'] // 相当于this.$store.dispatch('modifyName'),提交这个方法
+    ),
     async initData(params) {
       let res = await getPlatFormList({})
       if (res.status === 200) {
         this.menus = res.data.list
+        this.setUserInfo(res.data.user)
       }
     },
     async goToPath(params) {
