@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="table_container">
       <div class="mar10 pad10">
-        <h3>奖品管理</h3>
+        <break-sticks></break-sticks>
       </div>
       <div class="mar10">
         <prize-list
@@ -44,7 +44,8 @@ export default {
     }
   },
   components: {
-    'prize-list': () => import('@/components/prizeList.vue')
+    'prize-list': () => import('@/components/prizeList.vue'),
+    'break-sticks': () => import('@/components/common/small/breakSticks.vue')
   },
   created() {
     this.platformId = this.$route.query.platformId

@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     ...mapActions( // 语法糖
-      ['setUserInfo'] // 相当于this.$store.dispatch('modifyName'),提交这个方法
+      ['setUserInfo', 'setMenu'] // 相当于this.$store.dispatch('modifyName'),提交这个方法
     ),
     async initData(params) {
       let res = await getPlatFormList({})
@@ -76,10 +76,25 @@ export default {
         this.menus = res.data.list
         this.setUserInfo(res.data.user)
       }
+      if (this.menus && this.menus.length && this.menus[0].submenus && this.menus[0].submenus.length) {
+        this.menus[0].submenu = this.menus[0].submenus[0]
+        this.setMenu(this.menus[0])
+        this.$router.push({ path: this.menus[0].submenus[0].path })
+      }
     },
-    async goToPath(params) {
-      console.log('@click: goPath,', params)
-      this.$router.push({ path: params })
+    async goToPath(index, indexPath) {
+      let selectedMenu = {}
+      this.menus.forEach(menu => {
+        if (menu.index == indexPath[1]) {
+          this.selectedMenu = menu
+          menu.submenus.forEach(submenu => {
+            if (submenu.path === index) {
+              this.selectedMenu.submenu = submenu
+            }
+          })
+        }
+      })
+      this.setMenu(this.selectedMenu)
     }
   }
 }

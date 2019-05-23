@@ -1,5 +1,8 @@
 <template>
   <div class="fillcontain">
+    <div class="mar10 pad10">
+      <break-sticks></break-sticks>
+    </div>
     <div class="mar10">
       <div>
         <el-table border :data="resignDates" stripe style="width: 100%">
@@ -79,7 +82,8 @@ export default {
     }
   },
   components: {
-    'prize-list-dialog': () => import('@/components/prizeListDialog.vue')
+    'prize-list-dialog': () => import('@/components/prizeListDialog.vue'),
+    'break-sticks': () => import('@/components/common/small/breakSticks.vue')
   },
   created() {
     this.platformId = this.$route.query.platformId

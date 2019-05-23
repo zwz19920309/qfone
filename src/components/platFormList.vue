@@ -127,7 +127,6 @@ export default {
   props: ['platFormList', 'isEdit', 'callBack', 'dynamic'], // isEdit false: 只显示：true: 可操作
   watch: {
     'platFormList': function (newVal, oldVal) {
-      console.log('@neVal-platFromList: ', newVal)
       this.cPlatFormList = newVal
     }
   }

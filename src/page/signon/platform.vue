@@ -32,7 +32,6 @@ export default {
       let res = await getPlatFormList({})
       if ((res.status === 200)) {
         this.platFormList = res.data.list
-        console.log('@platFormList:', this.platFormList)
       }
     },
     async submit() {

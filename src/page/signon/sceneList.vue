@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="table_container">
       <div class="mar10 pad10">
-        <h3>应用列表</h3>
+        <break-sticks></break-sticks>
       </div>
       <div class="mar10">
         <scene-list
@@ -48,7 +48,8 @@ export default {
     }
   },
   components: {
-    'scene-list': () => import('@/components/sceneList.vue')
+    'scene-list': () => import('@/components/sceneList.vue'),
+    'break-sticks': () => import('@/components/common/small/breakSticks.vue')
   },
   created() {
     this.platformId = this.$route.query.platformId

@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="table_container">
       <div class="mar10 pad10">
-        <h3>奖励记录</h3>
+        <break-sticks></break-sticks>
       </div>
       <div class="mar10">
         <el-table border :data="recordList" style="width: 100%">
@@ -11,6 +11,12 @@
           <el-table-column prop="number" label="奖励数量"></el-table-column>
           <el-table-column prop="prize_note" label="奖励描述" width="250"></el-table-column>
           <el-table-column prop="created_at" label="奖励时间"></el-table-column>
+          <el-table-column prop="desc" label="操作类型" width="180">
+            <template slot-scope="scope">
+              <span v-if="scope.row.type === 1">收入</span>
+              <span v-else>消耗</span>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
       <div class="Pagination" style="text-align: left;margin-top: 10px;">
@@ -85,8 +91,8 @@ export default {
         sceneId: '',
         qUid: '',
         qSecenId: '',
-        qAppId: '',
-        qAppSecret: '',
+        qAppId: 'XenWteXacicouGeoUOxx',
+        qAppSecret: 'c79c292102143b3a8bd39ca9eb7f71c8',
         reuid: '',
         reSceneId: '',
         reSignDate: ''
@@ -101,7 +107,8 @@ export default {
     }
   },
   components: {
-    'prize-list': () => import('@/components/prizeList.vue')
+    'prize-list': () => import('@/components/prizeList.vue'),
+    'break-sticks': () => import('@/components/common/small/breakSticks.vue')
   },
   created() {
     this.platformId = this.$route.query.platformId

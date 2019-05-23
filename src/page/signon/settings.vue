@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import { addResignDate, getResignDateList } from '@/api/getData'
 export default {
   data() {
@@ -71,6 +72,9 @@ export default {
   },
   created() {
     this.initData()
+  },
+  computed: {
+    ...mapState(['menu']) // 动态计算属性
   },
   methods: {
     async initData() {

@@ -8,7 +8,8 @@ Vue.use(Vuex)
 
 const state = {
   userInfo: null, // 用户信息
-  login: false
+  login: false,
+  menu: {}
 }
 
 export default new Vuex.Store({

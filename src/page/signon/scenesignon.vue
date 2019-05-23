@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="mar10">
       <div class="pad10">
-        <h4>应用: {{scene.name}}</h4>
+        <break-sticks></break-sticks>
       </div>
       <div class="pad10">
         <signon-list
@@ -91,7 +91,8 @@ export default {
   },
   components: {
     'signon-list': () => import('@/components/signonList.vue'),
-    'signon-list-dialog': () => import('@/components/signonListDialog.vue')
+    'signon-list-dialog': () => import('@/components/signonListDialog.vue'),
+    'break-sticks': () => import('@/components/common/small/breakSticks.vue')
   },
   created() {
     this.platformId = this.$route.query.platformId

@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="table_container">
       <div class="mar10">
-        <h3>奖品管理</h3>
+        <break-sticks></break-sticks>
       </div>
       <div class="mar10 pad10">名称: {{signon.name}}</div>
       <div class="mar10 pad10" v-if="signon.checkin_type">类型: {{signon.checkin_type.name}}</div>
@@ -87,7 +87,8 @@ export default {
     }
   },
   components: {
-    'prize-list-dialog': () => import('@/components/prizeListDialog.vue')
+    'prize-list-dialog': () => import('@/components/prizeListDialog.vue'),
+    'break-sticks': () => import('@/components/common/small/breakSticks.vue')
   },
   created() {
     this.sceneId = this.$route.query.id

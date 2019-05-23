@@ -2,7 +2,9 @@
   <div class="fillcontain">
     <div class="table_container">
       <div class="mar10">
-        <div class="pad10">签到活动模板列表</div>
+        <div class="pad10">
+          <break-sticks></break-sticks>
+        </div>
         <div class="pad10">
           <signon-list
             :pid="platformId"
@@ -44,7 +46,8 @@ export default {
   },
   components: {
     'signon-list': () => import('@/components/signonList.vue'),
-    'edit-signon-dialog': () => import('@/components/editSignonDialog.vue')
+    'edit-signon-dialog': () => import('@/components/editSignonDialog.vue'),
+    'break-sticks': () => import('@/components/common/small/breakSticks.vue')
   },
   created() {
     this.platformId = this.$route.query.platformId

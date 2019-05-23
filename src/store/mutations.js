@@ -1,5 +1,6 @@
 import {
-  RECORD_USERINFO
+  RECORD_USERINFO,
+  SET_MENU
 } from './mutation-types.js'
 
 export default {
@@ -7,5 +8,8 @@ export default {
   [RECORD_USERINFO](state, info) {
     state.userInfo = info
     state.login = true
+  },
+  [SET_MENU](state, menu) {
+    state.menu = menu
   }
 }

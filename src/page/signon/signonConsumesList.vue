@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="table_container">
       <div class="mar10 pad10">
-        <h3>消耗管理</h3>
+        <break-sticks></break-sticks>
       </div>
       <div class="mar10">
         <el-table border :data="prizeList" stripe style="width: 100%">
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import { getConsumesBySignonById, bulkDeleteConsumes } from '@/api/getData'
 export default {
   data() {
@@ -49,7 +50,8 @@ export default {
     }
   },
   components: {
-    'prize-list': () => import('@/components/prizeList.vue')
+    'prize-list': () => import('@/components/prizeList.vue'),
+    'break-sticks': () => import('@/components/common/small/breakSticks.vue')
   },
   created() {
     this.signonId = this.$route.query.signonId
