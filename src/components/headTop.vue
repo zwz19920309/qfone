@@ -29,12 +29,13 @@ export default {
 <style lang="less">
 @import "../style/mixin";
 .header_container {
-  background-color: #eff2f7;
+  background-color: rgb(50, 64, 87);
   height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  color: #fff;
 }
 .avator {
   .wh(36px, 36px);
@@ -45,7 +46,6 @@ export default {
   text-align: center;
 }
 .out {
-  color: #409eff;
   cursor: pointer;
   text-decoration: underline;
 }

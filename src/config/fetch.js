@@ -21,8 +21,8 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
       method: type,
       headers: {
         'Accept': 'application/json',
-        'x-version': '1.0.0',
-        'x-app-id': 'v2C3vqANKrFBkBJw'
+        // 'x-version': '1.0.0',
+        //'x-app-id': 'v2C3vqANKrFBkBJw'
       },
       mode: 'cors',
       cache: 'force-cache'

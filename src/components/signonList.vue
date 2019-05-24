@@ -16,8 +16,7 @@
       </el-table-column>
       <el-table-column prop="name" label="签到周期">
         <template slot-scope="scope">
-          <span>{{scope.row.cycle_text.name}}</span>
-          <span v-if="scope.row.cycle_text.type == 5">{{scope.row.cycle_text.number}}(天)</span>
+          <span v-if="scope.row.cycle_text.type == 5">自定义: {{scope.row.cycle_text.number}}(天)</span>
           <span v-else>{{scope.row.cycle_text.name}}:{{DATETYPEVALUE[scope.row.cycle_text.type]}}(天)</span>
         </template>
       </el-table-column>
@@ -43,12 +42,7 @@
       </el-table-column>
       <el-table-column label="生效时间" v-if="isDate">
         <template slot-scope="scope">
-          <span v-if="scope.row.start_at">{{scope.row.start_at}}--{{scope.row.end_at}}</span>
-          <span
-            class="detail"
-            v-if="!scope.row.start_at"
-            @click="openEditDate(scope.$index, scope.row)"
-          >添加时间</span>
+          <span v-if="scope.row.start_at">{{scope.row.start_at}}至{{scope.row.end_at}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="desc" label="操作" width="180" v-if="isEdit">
@@ -165,7 +159,6 @@ export default {
         formId: (row.extra_text && row.extra_text.resign && row.extra_text.resign.form_id) ? row.extra_text.resign.form_id : 1,
         resignDates: (row.extra_text && row.extra_text.resign && row.extra_text.resign.resign_dates) ? row.extra_text.resign.resign_dates : []
       }
-      console.log('@:this.signon: ', this.signon)
       this.$refs.editSignon.open()
     },
     async handleDelete(row) {
@@ -174,7 +167,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        let res = await deleteSignon({ id: row.id })
+        let res = await bulkDeleteSignOn({ ids: [row.id] })
         if (res.status === 200) {
           this.$message({ message: '删除成功', type: 'success' })
           this.callBack && this.callBack()
@@ -248,7 +241,7 @@ export default {
       this.$router.push({ path: '/resignPlan', query: { id: row.id, platformId: this.cPid } })
     }
   },
-  props: ['signonList', 'isEdit', 'isDate', 'simplify', 'callBack', 'dynamic', 'pid'],
+  props: ['signonList', 'isEdit', 'simplify', 'callBack', 'dynamic', 'pid', 'isDate'],
   watch: {
     'pid': function (newVal, oldVal) {
       this.cPid = newVal
